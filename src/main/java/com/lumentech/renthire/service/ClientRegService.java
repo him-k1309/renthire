@@ -10,4 +10,6 @@ public interface ClientRegService {
     List<ClientRegDto> getAllClientDetails();
 
     ClientRegDto getClientDetailsById(long id);
+
+    ClientRegDto updateClientDetails(ClientRegDto dto, long id);
 }

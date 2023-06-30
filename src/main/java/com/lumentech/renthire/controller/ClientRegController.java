@@ -33,4 +33,11 @@ public class ClientRegController {
         ClientRegDto dto = service.getClientDetailsById(id);
         return ResponseEntity.ok(dto);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientRegDto> updateClientReg(@RequestBody ClientRegDto dto,
+                                                        @PathVariable(name="id") long id){
+        ClientRegDto clientRegDto = service.updateClientDetails(dto,id);
+        return ResponseEntity.ok(clientRegDto);
+    }
 }

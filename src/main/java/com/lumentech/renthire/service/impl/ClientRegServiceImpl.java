@@ -41,6 +41,17 @@ public class ClientRegServiceImpl implements ClientRegService {
         return mapToDto(clientReg);
     }
 
+    @Override
+    public ClientRegDto updateClientDetails(ClientRegDto dto, long id) {
+        ClientReg clientReg = clientRegRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("ClientReg", "id", id)
+        );
+        clientReg.setClientAddress(dto.getClientAddress());
+        clientReg.setPhone(dto.getPhone());
+        ClientReg update = clientRegRepository.save(clientReg);
+        return mapToDto(update);
+    }
+
     public ClientRegDto mapToDto(ClientReg newClient) {
         ClientRegDto dto = new ClientRegDto();
         dto.setClientId(newClient.getClientId());
