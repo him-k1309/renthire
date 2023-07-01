@@ -40,4 +40,10 @@ public class ClientRegController {
         ClientRegDto clientRegDto = service.updateClientDetails(dto,id);
         return ResponseEntity.ok(clientRegDto);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteClientReg(@PathVariable(name="id") long id){
+        service.deleteClientDetail(id);
+        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
+    }
 }

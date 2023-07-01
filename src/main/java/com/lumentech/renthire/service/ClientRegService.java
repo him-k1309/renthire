@@ -12,4 +12,6 @@ public interface ClientRegService {
     ClientRegDto getClientDetailsById(long id);
 
     ClientRegDto updateClientDetails(ClientRegDto dto, long id);
+
+    void deleteClientDetail(long id);
 }

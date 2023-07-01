@@ -52,6 +52,14 @@ public class ClientRegServiceImpl implements ClientRegService {
         return mapToDto(update);
     }
 
+    @Override
+    public void deleteClientDetail(long id) {
+        ClientReg clientReg = clientRegRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("ClientReg", "id", id)
+        );
+        clientRegRepository.delete(clientReg);
+    }
+
     public ClientRegDto mapToDto(ClientReg newClient) {
         ClientRegDto dto = new ClientRegDto();
         dto.setClientId(newClient.getClientId());
