@@ -23,7 +23,9 @@ public class ClientRegController {
 
     @PostMapping
     public ResponseEntity<ClientRegDto> createClientReg(@RequestBody ClientRegDto dto){
-        return new ResponseEntity<>(clientRegService.createClientReg(dto), HttpStatus.CREATED);
+        ClientRegDto clientDto = clientRegService.createClientReg(dto);
+        emailService.sendRegistrationEmail(clientDto.getEmail(), clientDto.getClientName());
+        return new ResponseEntity<>(clientDto, HttpStatus.CREATED);
     }
 
     @GetMapping
