@@ -7,7 +7,7 @@ import java.util.List;
 public interface ClientRegService {
     ClientRegDto createClientReg(ClientRegDto clientRegDto);
 
-    List<ClientRegDto> getAllClientDetails();
+    List<ClientRegDto> getAllClientDetails(int pageNo, int pageSize, String sortBy, String sortDir);
 
     ClientRegDto getClientDetailsById(long id);
 

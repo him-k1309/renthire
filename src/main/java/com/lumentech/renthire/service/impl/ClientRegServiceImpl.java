@@ -6,6 +6,10 @@ import com.lumentech.renthire.exception.ResourceNotFoundException;
 import com.lumentech.renthire.payload.ClientRegDto;
 import com.lumentech.renthire.repository.ClientRegRepository;
 import com.lumentech.renthire.service.ClientRegService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +32,15 @@ public class ClientRegServiceImpl implements ClientRegService {
     }
 
     @Override
-    public List<ClientRegDto> getAllClientDetails() {
+    public List<ClientRegDto> getAllClientDetails(int pageNo, int pageSize, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? 
+                Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        Page<ClientReg> clientRegs = clientRegRepository.findAll(pageable);
+        List<ClientReg> listOfClient = clientRegs.getContent();
+        List<ClientRegDto> listOfClientDto = listOfClient.stream().map(clientReg
+                -> mapToDto(clientReg)).collect(Collectors.toList());
+
         List<ClientReg> all = clientRegRepository.findAll();
         return all.stream().map(clientReg -> mapToDto(clientReg)).collect(Collectors.toList());
     }
