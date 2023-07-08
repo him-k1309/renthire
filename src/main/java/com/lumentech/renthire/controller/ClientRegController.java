@@ -1,6 +1,7 @@
 package com.lumentech.renthire.controller;
 
 import com.lumentech.renthire.payload.ClientRegDto;
+import com.lumentech.renthire.payload.ClientResponse;
 import com.lumentech.renthire.service.ClientRegService;
 import com.lumentech.renthire.util.EmailService;
 import org.springframework.http.HttpStatus;
@@ -29,14 +30,14 @@ public class ClientRegController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ClientRegDto>> getAllClientRegDetails(
+    public ResponseEntity<ClientResponse> getAllClientRegDetails(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
             @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir
     ){
 
-        List<ClientRegDto> allClientDetails = clientRegService.getAllClientDetails(pageNo, pageSize, sortBy, sortDir);
+        ClientResponse allClientDetails = clientRegService.getAllClientDetails(pageNo, pageSize, sortBy, sortDir);
         return ResponseEntity.ok(allClientDetails);
     }
 

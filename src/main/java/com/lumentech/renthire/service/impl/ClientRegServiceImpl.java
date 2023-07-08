@@ -4,6 +4,7 @@ import com.lumentech.renthire.entity.ClientReg;
 import com.lumentech.renthire.entity.Gender;
 import com.lumentech.renthire.exception.ResourceNotFoundException;
 import com.lumentech.renthire.payload.ClientRegDto;
+import com.lumentech.renthire.payload.ClientResponse;
 import com.lumentech.renthire.repository.ClientRegRepository;
 import com.lumentech.renthire.service.ClientRegService;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,7 @@ public class ClientRegServiceImpl implements ClientRegService {
     }
 
     @Override
-    public List<ClientRegDto> getAllClientDetails(int pageNo, int pageSize, String sortBy, String sortDir) {
+    public ClientResponse getAllClientDetails(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? 
                 Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
@@ -40,9 +41,17 @@ public class ClientRegServiceImpl implements ClientRegService {
         List<ClientReg> listOfClient = clientRegs.getContent();
         List<ClientRegDto> listOfClientDto = listOfClient.stream().map(clientReg
                 -> mapToDto(clientReg)).collect(Collectors.toList());
+        ClientResponse clientResponse = new ClientResponse();
+        clientResponse.setContent(listOfClientDto);
+        clientResponse.setPageNo(clientRegs.getNumber());
+        clientResponse.setPageSize(clientRegs.getSize());
+        clientResponse.setTatalPages(clientRegs.getTotalPages());
+        clientResponse.setTotalElements(clientRegs.getTotalElements());
+        clientResponse.setLast(clientResponse.isLast());
+        return clientResponse;
 
-        List<ClientReg> all = clientRegRepository.findAll();
-        return all.stream().map(clientReg -> mapToDto(clientReg)).collect(Collectors.toList());
+//        List<ClientReg> all = clientRegRepository.findAll();
+//        return all.stream().map(clientReg -> mapToDto(clientReg)).collect(Collectors.toList());
     }
 
     @Override
