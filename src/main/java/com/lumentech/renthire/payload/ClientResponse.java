@@ -13,6 +13,6 @@ public class ClientResponse {
     private int pageNo;
     private int pageSize;
     private long totalElements;
-    private int tatalPages;
+    private int totalPages;
     private boolean last;
 }

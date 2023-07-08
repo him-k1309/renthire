@@ -36,18 +36,22 @@ public class ClientRegServiceImpl implements ClientRegService {
     public ClientResponse getAllClientDetails(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? 
                 Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+
         Page<ClientReg> clientRegs = clientRegRepository.findAll(pageable);
+
         List<ClientReg> listOfClient = clientRegs.getContent();
         List<ClientRegDto> listOfClientDto = listOfClient.stream().map(clientReg
                 -> mapToDto(clientReg)).collect(Collectors.toList());
+
         ClientResponse clientResponse = new ClientResponse();
         clientResponse.setContent(listOfClientDto);
         clientResponse.setPageNo(clientRegs.getNumber());
         clientResponse.setPageSize(clientRegs.getSize());
-        clientResponse.setTatalPages(clientRegs.getTotalPages());
+        clientResponse.setTotalPages(clientRegs.getTotalPages());
         clientResponse.setTotalElements(clientRegs.getTotalElements());
-        clientResponse.setLast(clientResponse.isLast());
+        clientResponse.setLast(clientRegs.isLast());
         return clientResponse;
 
 //        List<ClientReg> all = clientRegRepository.findAll();

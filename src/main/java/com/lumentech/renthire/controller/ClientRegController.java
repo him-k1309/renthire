@@ -32,13 +32,13 @@ public class ClientRegController {
     @GetMapping
     public ResponseEntity<ClientResponse> getAllClientRegDetails(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
             @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir
     ){
 
-        ClientResponse allClientDetails = clientRegService.getAllClientDetails(pageNo, pageSize, sortBy, sortDir);
-        return ResponseEntity.ok(allClientDetails);
+        ClientResponse clientDetails = clientRegService.getAllClientDetails(pageNo, pageSize, sortBy, sortDir);
+        return ResponseEntity.ok(clientDetails);
     }
 
     @GetMapping("/{id}")
