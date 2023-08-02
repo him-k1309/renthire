@@ -4,7 +4,7 @@ import com.lumentech.renthire.entity.ClientReg;
 import com.lumentech.renthire.entity.Gender;
 import com.lumentech.renthire.exception.ResourceNotFoundException;
 import com.lumentech.renthire.payload.ClientRegDto;
-import com.lumentech.renthire.payload.ClientResponse;
+import com.lumentech.renthire.payload.PageResponse;
 import com.lumentech.renthire.repository.ClientRegRepository;
 import com.lumentech.renthire.service.ClientRegService;
 import org.springframework.data.domain.Page;
@@ -33,7 +33,7 @@ public class ClientRegServiceImpl implements ClientRegService {
     }
 
     @Override
-    public ClientResponse getAllClientDetails(int pageNo, int pageSize, String sortBy, String sortDir) {
+    public PageResponse getAllClientDetails(int pageNo, int pageSize, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? 
                 Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
 
@@ -45,14 +45,14 @@ public class ClientRegServiceImpl implements ClientRegService {
         List<ClientRegDto> listOfClientDto = listOfClient.stream().map(clientReg
                 -> mapToDto(clientReg)).collect(Collectors.toList());
 
-        ClientResponse clientResponse = new ClientResponse();
-        clientResponse.setContent(listOfClientDto);
-        clientResponse.setPageNo(clientRegs.getNumber());
-        clientResponse.setPageSize(clientRegs.getSize());
-        clientResponse.setTotalPages(clientRegs.getTotalPages());
-        clientResponse.setTotalElements(clientRegs.getTotalElements());
-        clientResponse.setLast(clientRegs.isLast());
-        return clientResponse;
+        PageResponse pageResponse = new PageResponse();
+        pageResponse.setClientContent(listOfClientDto);
+        pageResponse.setPageNo(clientRegs.getNumber());
+        pageResponse.setPageSize(clientRegs.getSize());
+        pageResponse.setTotalPages(clientRegs.getTotalPages());
+        pageResponse.setTotalElements(clientRegs.getTotalElements());
+        pageResponse.setLast(clientRegs.isLast());
+        return pageResponse;
 
 //        List<ClientReg> all = clientRegRepository.findAll();
 //        return all.stream().map(clientReg -> mapToDto(clientReg)).collect(Collectors.toList());

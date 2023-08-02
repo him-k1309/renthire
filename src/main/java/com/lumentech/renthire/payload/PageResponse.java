@@ -8,8 +8,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientResponse {
-    private List<ClientRegDto> content;
+public class PageResponse {
+    private List<ClientRegDto> clientContent;
+    private List<AgentDto> agentContent;
     private int pageNo;
     private int pageSize;
     private long totalElements;
