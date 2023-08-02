@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class ClientRegServiceImpl implements ClientRegService {
 
-    private ClientRegRepository clientRegRepository;
+    private final ClientRegRepository clientRegRepository;
 
     public ClientRegServiceImpl(ClientRegRepository clientRegRepository){
         this.clientRegRepository = clientRegRepository;
