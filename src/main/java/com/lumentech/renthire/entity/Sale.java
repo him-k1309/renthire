@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class Sale {
 
     @Column(name = "Property_Id")
     private int propertyId;
-    private String saleDate;
+    private Date saleDate;
 
     @ManyToOne
     @JoinColumn(name = "agentid",referencedColumnName = "Agent_Id")
