@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,5 +22,8 @@ public class Agent {
     private String office;
     private String agentName;
     private long phoneNo;
+
+    @OneToMany(mappedBy = "agent", fetch = FetchType.LAZY)
+    private List<Sale> sales= new ArrayList<>();
 
 }
