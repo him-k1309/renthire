@@ -51,4 +51,18 @@ public class AgentController {
         PageResponse agentDetails = agentService.getAllAgentPagination(pageNo, pageSize, sortBy, sortDir);
         return ResponseEntity.ok(agentDetails);
     }
+
+    // http://localhost:8080/api/agent/5/updateData
+    @PutMapping("{id}/updateData")
+    public ResponseEntity<AgentDto> updateAgentDetail(@PathVariable("id") int id,@RequestBody AgentDto agentDTO){
+        AgentDto dto = agentService.updateAgent(id, agentDTO);
+        return new ResponseEntity<>(dto,HttpStatus.OK);
+    }
+
+    // http://localhost:8080/api/agent/2/delete
+    @DeleteMapping("{id}/delete")
+    public ResponseEntity<String> DeleteData(@PathVariable("id") int id){
+        agentService.deleteData(id);
+        return new ResponseEntity<>("Agent Details Deleted Successfully!!",HttpStatus.OK);
+    }
 }

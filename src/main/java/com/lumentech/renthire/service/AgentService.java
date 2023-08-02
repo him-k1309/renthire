@@ -13,4 +13,8 @@ public interface AgentService {
     List<AgentDto> getAllAgentDetails();
 
     PageResponse getAllAgentPagination(int pageNo, int pageSize, String sortBy, String sortDir);
+
+    AgentDto updateAgent(long id, AgentDto agentDTO);
+
+    void deleteData(long id);
 }

@@ -67,6 +67,24 @@ public class AgentServiceImpl implements AgentService {
         return pageResponse;
     }
 
+    @Override
+    public AgentDto updateAgent(long id, AgentDto agentDTO) {
+        Agent agent = agentRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Agent", "id", id)
+        );
+        agent.setPhoneNo(agentDTO.getPhoneNo());
+        agent.setOffice(agentDTO.getOffice());
+        Agent update = agentRepo.save(agent);
+        return mapToDto(update);
+    }
+
+    @Override
+    public void deleteData(long id) {
+        Agent agent = agentRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Agent", "id", id));
+        agentRepo.deleteById(id);
+    }
+
     private AgentDto mapToDto(Agent agent) {
         AgentDto dto = new AgentDto();
         dto.setAgentId(agent.getAgentId());
