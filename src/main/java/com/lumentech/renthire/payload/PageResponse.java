@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PageResponse {
     private List<ClientRegDto> clientContent;
+    private List<SaleDto> saleContent;
     private List<AgentDto> agentContent;
     private int pageNo;
     private int pageSize;

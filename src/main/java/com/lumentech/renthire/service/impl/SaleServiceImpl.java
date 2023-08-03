@@ -3,17 +3,24 @@ package com.lumentech.renthire.service.impl;
 import com.lumentech.renthire.entity.Agent;
 import com.lumentech.renthire.entity.Sale;
 import com.lumentech.renthire.exception.ResourceNotFoundException;
+import com.lumentech.renthire.payload.PageResponse;
 import com.lumentech.renthire.payload.SaleDto;
 import com.lumentech.renthire.repository.AgentRepository;
 import com.lumentech.renthire.repository.SaleRepository;
 import com.lumentech.renthire.service.SaleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SaleServiceImpl implements SaleService {
@@ -44,6 +51,45 @@ public class SaleServiceImpl implements SaleService {
         Sale saveSale = saleRepo.save(sale);
         SaleDto dto = mapToDto(saveSale);
         return dto;
+    }
+
+    @Override
+    public SaleDto getSaleDetailById(long id) {
+        Sale sale = saleRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Sale", "id", id)
+        );
+        SaleDto saleDto = mapToDto(sale);
+        return saleDto;
+    }
+
+    @Override
+    public List<SaleDto> getAllSaleDetails() {
+        List<Sale> allSale = saleRepo.findAll();
+        List<SaleDto> saleDto = allSale.stream().map(sale -> mapToDto(sale)).collect(Collectors.toList());
+        return saleDto;
+    }
+
+    @Override
+    public PageResponse getAllSaleDetailsByPagination(int pageNo, int pageSize, String sortBy, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ?
+                Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+        Page<Sale> salePage = saleRepo.findAll(pageable);
+
+        List<Sale> content = salePage.getContent();
+        List<SaleDto> contentList = content.stream()
+                .map(sale -> mapToDto(sale))
+                .collect(Collectors.toList());
+
+        PageResponse pageResponse = new PageResponse();
+        pageResponse.setSaleContent(contentList);
+        pageResponse.setPageNo(salePage.getNumber());
+        pageResponse.setPageSize(salePage.getSize());
+        pageResponse.setTotalPages(salePage.getSize());
+        pageResponse.setTotalPages(salePage.getTotalPages());
+        pageResponse.setTotalElements(salePage.getTotalElements());
+        pageResponse.setLast(salePage.isLast());
+        return pageResponse;
     }
 
     private Sale mapToEntity(SaleDto saleDTO) {
