@@ -11,6 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -29,7 +31,7 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public SaleDto createSale(SaleDto saleDTO) {
-        long agentId = saleDTO.getAgent_id();
+        long agentId = saleDTO.getAgentId();
         // Check if the provided Agent ID exists in the Agent table
         Optional<Agent> agent = agentRepo.findById(agentId);
         if (!agent.isPresent()){

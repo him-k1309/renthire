@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -18,19 +19,34 @@ public class Sale {
     @Column(name = "Client_Id")
     private int cid;
 
-    @Column(name = "Agent_Id")
+    @Column(name = "Agent_ID")
     private int agentId;
 
     @Column(name = "Property_Id")
     private int propertyId;
-    private Date saleDate;
+    private LocalDate saleDate;
 
     @ManyToOne
-    @JoinColumn(name = "agentid",referencedColumnName = "Agent_Id")
+    @JoinColumn(name = "agentid", referencedColumnName = "Agent_ID")
     private Agent agent;
 
 }
    /*
+
+    {
+  "cid": 1,
+  "agentId": 1,
+  "propertyId": 1,
+  "saleDate": "2023-07-01",
+  "agent": {
+    "agentId": 3,
+    "office": "Relience Office",
+    "agentName": "John Doe",
+    "phoneNo": 1234567890
+  }
+}
+    */
+/*
 
     {
   "id": 1,
