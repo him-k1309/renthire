@@ -25,7 +25,7 @@ public class SaleController {
     }
 
     // http://localhost:8080/api/sale/1/getData
-    @GetMapping("/{id}/{getData}")
+    @GetMapping("/{id}/getData")
     public ResponseEntity<SaleDto> getSaleDataById(@PathVariable("id") long id){
         SaleDto saleDto = saleService.getSaleDetailById(id);
         return new ResponseEntity<>(saleDto, HttpStatus.OK);
@@ -48,4 +48,19 @@ public class SaleController {
     ){
         return saleService.getAllSaleDetailsByPagination(pageNo, pageSize, sortBy, sortDir);
     }
+
+    // http://localhost:8080/api/sale/1
+    @PutMapping("/{id}")
+    public ResponseEntity<SaleDto> updateSale(@PathVariable("id") long id, @RequestBody SaleDto saleDto){
+        SaleDto dto = saleService.updateSale(id, saleDto);
+        return ResponseEntity.ok(dto);
+    }
+
+    // http://localhost:8080/api/sale/1
+    @DeleteMapping("/{cid}")
+    public ResponseEntity<String> deleteSale(@PathVariable("cid") int id){
+        saleService.deleteSaleById(id);
+        return new ResponseEntity<>("Sale Details Deleted Successfully!!", HttpStatus.NO_CONTENT);
+    }
+
 }

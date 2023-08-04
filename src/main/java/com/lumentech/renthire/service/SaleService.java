@@ -13,4 +13,8 @@ public interface SaleService {
     List<SaleDto> getAllSaleDetails();
 
     PageResponse getAllSaleDetailsByPagination(int pageNo, int pageSize, String sortBy, String sortDir);
+
+    SaleDto updateSale(long id, SaleDto saleDto);
+
+    void deleteSaleById(long id);
 }

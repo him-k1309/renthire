@@ -17,13 +17,13 @@ public class Agent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Agent_Id")
+    @Column(name = "agent_id")
     private long agentId;
     private String office;
     private String agentName;
     private long phoneNo;
 
-    @OneToMany(mappedBy = "agent", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "agent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Sale> sales= new ArrayList<>();
 
 }

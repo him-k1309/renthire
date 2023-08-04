@@ -14,7 +14,7 @@ public class ClientReg {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Client_Id")
+    @Column(name = "client_id")
     private long clientId;
 
     @Column(nullable = false)
@@ -32,5 +32,8 @@ public class ClientReg {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Gender gender;
+
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    private Sale sale;
 
 }

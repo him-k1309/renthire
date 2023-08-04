@@ -15,9 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -90,6 +87,24 @@ public class SaleServiceImpl implements SaleService {
         pageResponse.setTotalElements(salePage.getTotalElements());
         pageResponse.setLast(salePage.isLast());
         return pageResponse;
+    }
+
+    @Override
+    public SaleDto updateSale(long id, SaleDto saleDto) {
+        Sale sale = saleRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Sale", "id", id)
+        );
+        sale.setSaleDate(saleDto.getSaleDate());
+        Sale update = saleRepo.save(sale);
+        return mapToDto(update);
+    }
+
+    @Override
+    public void deleteSaleById(long id) {
+        Sale sale = saleRepo.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Sale", "id", id)
+        );
+        saleRepo.deleteById(id);
     }
 
     private Sale mapToEntity(SaleDto saleDTO) {

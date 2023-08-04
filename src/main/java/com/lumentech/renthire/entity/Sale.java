@@ -16,19 +16,23 @@ public class Sale {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Client_Id")
-    private int cid;
+    @Column(name = "client_id")
+    private int clientId;
 
-    @Column(name = "Agent_ID")
+    @Column(name = "agent_id")
     private int agentId;
 
-    @Column(name = "Property_Id")
+    @Column(name = "property_id")
     private int propertyId;
     private LocalDate saleDate;
 
     @ManyToOne
-    @JoinColumn(name = "agentid", referencedColumnName = "Agent_ID")
+    @JoinColumn(name = "agentid", referencedColumnName = "agent_id")
     private Agent agent;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private ClientReg client;
 
 }
    /*
