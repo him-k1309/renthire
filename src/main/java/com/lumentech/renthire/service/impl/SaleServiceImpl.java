@@ -82,7 +82,6 @@ public class SaleServiceImpl implements SaleService {
         pageResponse.setSaleContent(contentList);
         pageResponse.setPageNo(salePage.getNumber());
         pageResponse.setPageSize(salePage.getSize());
-        pageResponse.setTotalPages(salePage.getSize());
         pageResponse.setTotalPages(salePage.getTotalPages());
         pageResponse.setTotalElements(salePage.getTotalElements());
         pageResponse.setLast(salePage.isLast());

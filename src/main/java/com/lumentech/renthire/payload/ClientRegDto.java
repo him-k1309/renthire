@@ -16,4 +16,6 @@ public class ClientRegDto {
     private String email;
 
     private String gender;
+
+    private SaleDto sale;
 }

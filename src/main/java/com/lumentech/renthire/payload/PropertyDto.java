@@ -2,13 +2,14 @@ package com.lumentech.renthire.payload;
 
 import lombok.Data;
 
+import java.time.Instant;
 import java.util.Date;
 @Data
 public class PropertyDto {
 
     private long propertyId;
 
-    private Date propertyDateAdd;
+    private Instant propertyDateAdd;
 
     private String propertyAddress;
 

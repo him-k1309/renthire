@@ -38,7 +38,7 @@ public class SaleController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    // http://localhost:8080/api/sale?pageNo=1&pageSize=2&sortBy=cid&sortDir=asc
+    // http://localhost:8080/api/sale?pageNo=1&pageSize=2&sortBy=saleId&sortDir=asc
     @GetMapping
     public PageResponse getAllSaleByPagination(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,

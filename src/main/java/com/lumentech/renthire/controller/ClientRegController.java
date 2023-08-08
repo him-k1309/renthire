@@ -55,6 +55,6 @@ public class ClientRegController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteClientReg(@PathVariable(name="id") long id){
         clientRegService.deleteClientDetail(id);
-        return new ResponseEntity<>("Deleted Successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Deleted Successfully", HttpStatus.NO_CONTENT);
     }
 }

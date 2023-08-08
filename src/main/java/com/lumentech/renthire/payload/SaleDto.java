@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class SaleDto {
 
-    private int cid;
+    private int saleId;
     private int agentId;
     private int propertyId;
     private LocalDate saleDate;

@@ -12,6 +12,7 @@ public class PageResponse {
     private List<ClientRegDto> clientContent;
     private List<SaleDto> saleContent;
     private List<AgentDto> agentContent;
+    private List<PropertyDto> propContent;
     private int pageNo;
     private int pageSize;
     private long totalElements;

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 import java.util.Date;
 @Data
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class Property {
     private long propertyId;
 
     @Column(nullable = false)
-    private Date propertyDateAdd;
+    private Instant propertyDateAdd;
 
     @Column(nullable = false)
     private String propertyAddress;

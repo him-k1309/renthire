@@ -16,8 +16,8 @@ public class Sale {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id")
-    private int clientId;
+    @Column(name = "sale_id")
+    private int saleId;
 
     @Column(name = "agent_id")
     private int agentId;
@@ -30,9 +30,11 @@ public class Sale {
     @JoinColumn(name = "agentid", referencedColumnName = "agent_id")
     private Agent agent;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private ClientReg client;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private ClientReg client;
+
+    @OneToOne(mappedBy = "sale", fetch = FetchType.LAZY)
+    private ClientReg clientReg;
 
 }
    /*
