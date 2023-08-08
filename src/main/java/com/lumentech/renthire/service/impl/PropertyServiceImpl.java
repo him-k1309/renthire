@@ -22,7 +22,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     private final PropertyRepository propertyRepo;
 
-    private ModelMapper mapper;
+    private final ModelMapper mapper;
 
     public PropertyServiceImpl(PropertyRepository propertyRepo, ModelMapper mapper){
         this.propertyRepo = propertyRepo;

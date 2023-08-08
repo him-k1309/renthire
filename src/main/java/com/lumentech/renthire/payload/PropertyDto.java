@@ -3,7 +3,7 @@ package com.lumentech.renthire.payload;
 import lombok.Data;
 
 import java.time.Instant;
-import java.util.Date;
+
 @Data
 public class PropertyDto {
 
