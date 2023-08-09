@@ -13,6 +13,7 @@ public class PageResponse {
     private List<SaleDto> saleContent;
     private List<RentDto> rentContent;
     private List<AgentDto> agentContent;
+    private List<OwnerDto> ownerContent;
     private List<PropertyDto> propContent;
     private List<PropertyForSaleDto> propForSaleContent;
     private List<PropertyForRentDto> propForRentContent;

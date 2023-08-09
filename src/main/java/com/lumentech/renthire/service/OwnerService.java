@@ -1,6 +1,7 @@
 package com.lumentech.renthire.service;
 
 import com.lumentech.renthire.payload.OwnerDto;
+import com.lumentech.renthire.payload.PageResponse;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface OwnerService {
     void deleteOwnerDetail(long id);
 
     List<OwnerDto> findAllOwner();
+
+    PageResponse getAllOwner(int pageNo, int pageSize, String sortBy, String sortDir);
 }

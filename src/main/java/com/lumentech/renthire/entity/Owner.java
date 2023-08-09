@@ -23,4 +23,8 @@ public class Owner {
     @Column(nullable = false)
     private long phone;
 
+    @OneToOne
+    @JoinColumn(name = "Prop_Id",referencedColumnName = "property_id")
+    private Property property;
+
 }

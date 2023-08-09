@@ -16,6 +16,7 @@ public class Property {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "property_id")
     private long propertyId;
 
     @Column(nullable = false)
@@ -38,5 +39,8 @@ public class Property {
 
     @Column(nullable = false)
     private String propertyDescription;
+
+    @OneToOne(mappedBy = "property", fetch = FetchType.LAZY)
+    private Owner owner;
 
 }

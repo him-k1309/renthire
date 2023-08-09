@@ -8,4 +8,5 @@ public class OwnerDto {
     private long ownerId;
     private String ownerName;
     private long phone;
+    private PropertyDto property;
 }
