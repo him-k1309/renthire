@@ -11,6 +11,7 @@ import java.util.List;
 public class PageResponse {
     private List<ClientRegDto> clientContent;
     private List<SaleDto> saleContent;
+    private List<RentDto> rentContent;
     private List<AgentDto> agentContent;
     private List<PropertyDto> propContent;
     private List<PropertyForSaleDto> propForSaleContent;

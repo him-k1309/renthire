@@ -94,8 +94,8 @@ public class SaleServiceImpl implements SaleService {
                 () -> new ResourceNotFoundException("Sale", "id", id)
         );
         sale.setSaleDate(saleDto.getSaleDate());
-        Sale update = saleRepo.save(sale);
-        return mapToDto(update);
+        Sale updateSale = saleRepo.save(sale);
+        return mapToDto(updateSale);
     }
 
     @Override

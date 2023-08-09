@@ -24,6 +24,7 @@ public class Sale {
 
     @Column(name = "property_id")
     private int propertyId;
+
     private LocalDate saleDate;
 
     @ManyToOne
